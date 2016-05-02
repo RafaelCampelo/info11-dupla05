@@ -25,46 +25,58 @@ int main(void)
 
     if(0!=comb)     //Quando recebe uma combinacao imperfeita
     {
-        if((0!=cen)&&(1!=cen)&&(0==dez)&&(0==uni)||(0==cen)&&(0!=dez)&&(1!=dez)&&(0==uni)||(0==cen)&&(0==dez)&&(0!=uni)&&(1!=uni))
+        if((0!=cen)&&(1!=cen)&&(1==dez)&&(0==uni)||(1==cen)&&(0!=dez)&&(1!=dez)&&(0==uni)||(1==cen)&&(0==dez)&&(0!=uni)&&(1!=uni)||(0!=cen)&&(1!=cen)&&(0==dez)&&(1==uni)||(0==cen)&&(0!=dez)&&(1!=dez)&&(1==uni)||(0==cen)&&(1==dez)&&(0!=uni)&&(1!=uni))
         {
-            if(0!=cen)
-                cenf = 1;
-            if(0!=dez)
-                dezf = 1;
-            if(0!=uni)
-                unif = 1;
+            if((0!=cen)&&(1!=cen))
+                cenf = 0;
+            if((0!=dez)&&(1!=dez))
+                dezf = 0;
+            if((0!=uni)&&(1!=uni))
+                unif = 0;
         }
         else
         {
-            for(i=0;i<=uni;i++)
+            if((0!=cen)&&(1!=cen)&&(0==dez)&&(0==uni)||(0==cen)&&(0!=dez)&&(1!=dez)&&(0==uni)||(0==cen)&&(0==dez)&&(0!=uni)&&(1!=uni))
             {
-                ver = (uni-i)^dez^cen;
-                if(ver==0)
-                {
-                    unif = uni-i;
-                    break;
-                }
+                if(0!=cen)
+                    cenf = 1;
+                if(0!=dez)
+                    dezf = 1;
+                if(0!=uni)
+                    unif = 1;
             }
-            if(ver!=0)
+            else
             {
-                for(i=0;i<=dez;i++)
+                for(i=0;i<=uni;i++)
                 {
-                    ver = uni^(dez-i)^cen;
+                    ver = (uni-i)^dez^cen;
                     if(ver==0)
                     {
-                        dezf = dez-i;
+                        unif = uni-i;
                         break;
                     }
                 }
-                if(0!=ver)
+                if(ver!=0)
                 {
-                    for(i=0;i<=cen;i++)
+                    for(i=0;i<=dez;i++)
                     {
-                        ver = uni^dez^(cen-i);
+                        ver = uni^(dez-i)^cen;
                         if(ver==0)
                         {
-                            cenf = cen-i;
+                            dezf = dez-i;
                             break;
+                        }
+                    }
+                    if(0!=ver)
+                    {
+                        for(i=0;i<=cen;i++)
+                        {
+                            ver = uni^dez^(cen-i);
+                            if(ver==0)
+                            {
+                                cenf = cen-i;
+                                break;
+                            }
                         }
                     }
                 }
